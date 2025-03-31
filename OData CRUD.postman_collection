@@ -1,0 +1,843 @@
+{
+	"info": {
+		"_postman_id": "129868d7-4556-45c5-8e63-f459663ce142",
+		"name": "BootCamp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27200422"
+	},
+	"item": [
+		{
+			"name": "CRUD - READ",
+			"item": [
+				{
+					"name": "1_Count",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/data/CustomerGroups?$count=true",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"data",
+								"CustomerGroups"
+							],
+							"query": [
+								{
+									"key": "$count",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2_Top 5",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/data/CustomersV3?$top= 5&$orderby=AddressCountryRegionId desc",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"data",
+								"CustomersV3"
+							],
+							"query": [
+								{
+									"key": "$top",
+									"value": " 5"
+								},
+								{
+									"key": "$orderby",
+									"value": "AddressCountryRegionId desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.Filter",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/data/CustomersV3?$filter= CustomerGroupId eq '20'&$count=true",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"data",
+								"CustomersV3"
+							],
+							"query": [
+								{
+									"key": "$filter",
+									"value": " CustomerGroupId eq '20'"
+								},
+								{
+									"key": "$count",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4.CustomerPostal Address",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/data/CustomerPostalAddresses?$filter=CustomerAccountNumber eq 'US-003'",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"data",
+								"CustomerPostalAddresses"
+							],
+							"query": [
+								{
+									"key": "$filter",
+									"value": "CustomerAccountNumber eq 'US-003'"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4.Filter AddressCountryRegion",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/data/VendorsV3?$filter=AddressCountryRegionId eq 'USA'&$count=true",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"data",
+								"VendorsV3"
+							],
+							"query": [
+								{
+									"key": "$filter",
+									"value": "AddressCountryRegionId eq 'USA'"
+								},
+								{
+									"key": "$count",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5.Enums & Multiple filters",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/data/SalesOrderHeadersV4?$filter= SalesOrderStatus eq Microsoft.Dynamics.DataEntities.SalesStatus'BackOrder' and OrderingCustomerAccountNumber eq 'DE-001'&$count=true ",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"data",
+								"SalesOrderHeadersV4"
+							],
+							"query": [
+								{
+									"key": "$filter",
+									"value": " SalesOrderStatus eq Microsoft.Dynamics.DataEntities.SalesStatus'BackOrder' and OrderingCustomerAccountNumber eq 'DE-001'"
+								},
+								{
+									"key": "$count",
+									"value": "true "
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6.cross company",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/data/CustomerGroups?cross-company=true&$filter=dataAreaId eq 'usrt' or dataAreaId eq 'ussi'&$select=CustomerGroupId,dataAreaId,Description&$orderby=CustomerGroupId asc",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"data",
+								"CustomerGroups"
+							],
+							"query": [
+								{
+									"key": "cross-company",
+									"value": "true"
+								},
+								{
+									"key": "$filter",
+									"value": "dataAreaId eq 'usrt' or dataAreaId eq 'ussi'"
+								},
+								{
+									"key": "$select",
+									"value": "CustomerGroupId,dataAreaId,Description"
+								},
+								{
+									"key": "$orderby",
+									"value": "CustomerGroupId asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "7.Metadata",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/data/$metadata",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"data",
+								"$metadata"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "8.Expand",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/data/PurchaseOrderHeaders?$expand=PurchaseOrderLines&$top=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"data",
+								"PurchaseOrderHeaders"
+							],
+							"query": [
+								{
+									"key": "$expand",
+									"value": "PurchaseOrderLines"
+								},
+								{
+									"key": "$top",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "9.Arithematic - gt & Select",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/data/ReleasedProductsV2?$select=SalesPrice,ItemNumber&$filter=SalesPrice gt 150",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"data",
+								"ReleasedProductsV2"
+							],
+							"query": [
+								{
+									"key": "$select",
+									"value": "SalesPrice,ItemNumber"
+								},
+								{
+									"key": "$filter",
+									"value": "SalesPrice gt 150"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "10.Arithematic - WildCard",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/data/ReleasedProductsV2?$filter=SearchName eq '*Cables' &$count=true &$select=ItemNumber,SearchName &$orderby=SearchName desc",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"data",
+								"ReleasedProductsV2"
+							],
+							"query": [
+								{
+									"key": "$filter",
+									"value": "SearchName eq '*Cables' "
+								},
+								{
+									"key": "$count",
+									"value": "true "
+								},
+								{
+									"key": "$select",
+									"value": "ItemNumber,SearchName "
+								},
+								{
+									"key": "$orderby",
+									"value": "SearchName desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "12.Arithematic - lt and not",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/data/ReleasedProductsV2?$filter=SalesPrice lt 150 and SalesPrice ne 0 &$select=ItemNumber,SalesPrice&$count=true&$orderby=SalesPrice asc",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"data",
+								"ReleasedProductsV2"
+							],
+							"query": [
+								{
+									"key": "$filter",
+									"value": "SalesPrice lt 150 and SalesPrice ne 0 "
+								},
+								{
+									"key": "$select",
+									"value": "ItemNumber,SalesPrice"
+								},
+								{
+									"key": "$count",
+									"value": "true"
+								},
+								{
+									"key": "$orderby",
+									"value": "SalesPrice asc"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CRUD - CREATE",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"PoolId\": \"11\",\r\n    \"PoolName\": \"Test pool2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/data/SalesOrderPools",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"data",
+								"SalesOrderPools"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Enqueue",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "CUSTOMERGROUPID,CLEARINGPERIODPAYMENTTERMNAME,CUSTOMERACCOUNTNUMBERSEQUENCE,DEFAULTDIMENSIONDISPLAYVALUE,DESCRIPTION,ISSALESTAXINCLUDEDINPRICE,PAYMENTTERMID,TAXGROUPID,WRITEOFFREASON\r\nAE101,,,,AE10,No,,,\r\n1000,Net10,,,100Upd,No,Net10,,",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/connector/enqueue/%7B09F38915-BD05-4EE9-9947-4CCCFE668466%7D?entity=Customer%20groups",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"connector",
+								"enqueue",
+								"%7B09F38915-BD05-4EE9-9947-4CCCFE668466%7D"
+							],
+							"query": [
+								{
+									"key": "entity",
+									"value": "Customer%20groups"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Batch",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/mixed;boundary=batch_d63a-e9be-2927",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "--batch_d63a-e9be-2927\r\nContent-Type: multipart/mixed; boundary=changeset_2499-90ab-7b93\r\n\r\n--changeset_2499-90ab-7b93\r\nContent-Type: application/http\r\nContent-Transfer-Encoding: binary\r\n\r\nPOST CustomerGroups?cross-company=true HTTP/1.1\r\nContent-ID: 1\r\nAccept: application/json;q=0.9, */*;q=0.1\r\nOData-Version: 4.0\r\nContent-Type: application/json\r\nOData-MaxVersion: 4.0\r\n\r\n{\"CustomerGroupId\":\"Test Batch121\",\"Description\":\"Test Batch121\",\"PaymentTermId\":\"Net30\",\"dataAreaId\":\"usmf\"}\r\n--changeset_2499-90ab-7b93--\r\n\r\n--batch_d63a-e9be-2927\r\nContent-Type: multipart/mixed; boundary=changeset_b573-33b2-85ff\r\n\r\n--changeset_b573-33b2-85ff\r\nContent-Type: application/http\r\nContent-Transfer-Encoding: binary\r\n\r\nPOST CustomerGroups?cross-company=true HTTP/1.1\r\nContent-ID: 2\r\nAccept: application/json;q=0.9, */*;q=0.1\r\nOData-Version: 4.0\r\nContent-Type: application/json\r\nOData-MaxVersion: 4.0\r\n\r\n{\"CustomerGroupId\":\"TestBatch2222\",\"Description\":\"TestBatch2222\",\"PaymentTermId\":\"Net30\",\"dataAreaId\":\"ussi\"}\r\n--changeset_b573-33b2-85ff--\r\n",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/data/$batch",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"data",
+								"$batch"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CRUD - UPDATE",
+			"item": [
+				{
+					"name": "Update Customer postal address",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"AddressStreet\" : \"2134 Avenue road Bootcamp\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/data/CustomerPostalAddresses(CustomerAccountNumber = 'US-003',CustomerLegalEntityId ='usmf',AddressLocationId ='000001209',Effective=2025-02-27T13:41:44Z,dataAreaId='usmf')",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"data",
+								"CustomerPostalAddresses(CustomerAccountNumber = 'US-003',CustomerLegalEntityId ='usmf',AddressLocationId ='000001209',Effective=2025-02-27T13:41:44Z,dataAreaId='usmf')"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Pool",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \r\n    \"PoolName\": \"Test pool updated\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/data/SalesOrderPools(PoolId='11',dataAreaId='usmf')",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"data",
+								"SalesOrderPools(PoolId='11',dataAreaId='usmf')"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CRUD  - DELETE",
+			"item": [
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/data/SalesOrderPools(PoolId='11',dataAreaId='usmf')",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"data",
+								"SalesOrderPools(PoolId='11',dataAreaId='usmf')"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OData Action",
+			"item": [
+				{
+					"name": "DIXF Message Status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"messageId\":\"A6A2E082-27FC-42FC-965E-65EF2F4A032B\"\r\n   \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/data/DataManagementDefinitionGroups/Microsoft.Dynamics.DataEntities.GetMessageStatus",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"data",
+								"DataManagementDefinitionGroups",
+								"Microsoft.Dynamics.DataEntities.GetMessageStatus"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AuthToken",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var response = pm.response.json();\r",
+							"console.log(response);\r",
+							"pm.globals.set('token', response.access_token);\r",
+							"pm.globals.set('url', response.resource);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "client_id",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "resource",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://login.microsoftonline.com/89d27f6d-5723-4cfd-94d8-6d7e24e6fc53/oauth2/token",
+					"protocol": "https",
+					"host": [
+						"login",
+						"microsoftonline",
+						"com"
+					],
+					"path": [
+						"89d27f6d-5723-4cfd-94d8-6d7e24e6fc53",
+						"oauth2",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
